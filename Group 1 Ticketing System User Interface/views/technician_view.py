@@ -246,8 +246,13 @@ def display_ticket_information(print_options):
             tickets.sort(key=lambda x: datetime.strptime(x['open_date_time'], '%a, %d %b %Y %H:%M:%S %Z'), reverse=True)
 
             for ticket in tickets:
-                ticket_dict = {key: textwrap.fill(value, 50) if isinstance(value, str) and len(value) > 50 else value for key, value in ticket.items()}
-                utils.print_json_in_table_format(ticket_dict, options=options)
+
+                # ticket_dict = {key: textwrap.fill(value, 50) if isinstance(value, str) and len(value) > 50 else value for key, value in ticket.items()}
+                # utils.print_json_in_table_format(ticket_dict, options=options)
+
+                utils.print_json_in_table_format(ticket, options=options)
+
+
                 utils.print_blank_line(options=options)
                 utils.print_divider(options=options)
                             

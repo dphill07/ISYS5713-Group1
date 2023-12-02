@@ -165,7 +165,7 @@ def view_all_tickets(print_options):
                 # options.text_color = Term.BLUE_BOLD
                 utils.print_divider(options=options)
 
-                utils.print_text_block("Current Technicians", top_border=False, bottom_border=False, options=options)
+                utils.print_text_block("Current Tickets", top_border=False, bottom_border=False, options=options)
                 ticket_dict = {}
                 for ticket in tickets:
 

@@ -127,9 +127,18 @@ def get_input(prompt, options: PrintOptions = None):
 
     return input(options.text_color + prompt + text_print_options.text_color)
 
-def print_json_in_table_format(json_object, ordered_keys=None, rename_keys=None, tablefmt='fancy_grid', options: PrintOptions=None):
+def print_json_in_table_format(json_object, ordered_keys=None, rename_keys=None, tablefmt='fancy_grid', options: PrintOptions=None, max_value_width=None):
     if options is None:
         options = PrintOptions()
+
+    if max_value_width is None:
+        keys = ordered_keys if ordered_keys else json_object.keys()
+        if rename_keys:
+            keys = [rename_keys.get(key, key) for key in keys]
+        max_key_width = max(len(key) for key in keys) + 2
+        max_value_width = options.screen_width - max_key_width - 7
+
+    json_object = {key: textwrap.fill(value, max_value_width) if isinstance(value, str) and len(value) > max_value_width else value for key, value in json_object.items()}
 
     table = []
     keys = ordered_keys if ordered_keys else json_object.keys()
@@ -151,43 +160,3 @@ def print_json_in_table_format(json_object, ordered_keys=None, rename_keys=None,
     for line in table_lines:
         print_text(line, options)
 
-
-# def print_json_in_table_format(json_object, ordered_keys=None, rename_keys=None, options: PrintOptions=None):
-#     if options is None:
-#         options = PrintOptions()
-
-#     keys = ordered_keys if ordered_keys else json_object.keys()
-#     if rename_keys:
-#         keys = [rename_keys.get(key, key) for key in keys]
-#     key_width = max(len(key) for key in keys) + 2
-#     value_width = options.screen_width - key_width - 5
-
-#     for key in keys:
-#         value = json_object.get(key)
-#         if rename_keys and key in rename_keys:
-#             key = rename_keys[key]
-#         if value is not None and isinstance(value, dict):
-#             for sub_key, sub_value in value.items():
-#                 if rename_keys and sub_key in rename_keys:
-#                     sub_key = rename_keys[sub_key]
-#                 print_table_row(sub_key, str(sub_value), key_width, value_width, options)
-#         else:
-#             print_table_row(key, str(value), key_width, value_width, options)
-#     print_text('└' + '─' * (key_width - 1) + '┴' + '─' * (value_width - 3) + '┘', options)
-
-# def print_table_row(key, value, key_width, value_width, options: PrintOptions=None):
-#     if options is None:
-#         options = PrintOptions()
-
-#     print_text('├' + '─' * (key_width) + '┼' + '─' * (value_width - 2) + '┤', options)
-
-#     # Wrap the value to the next line if it's too long
-#     wrapper = textwrap.TextWrapper(width=value_width - 4)
-#     lines = wrapper.wrap(value)
-
-#     # Don't print the key value after the first line
-#     print_text(f'│ {key.ljust(key_width - 4)} │ {lines[0].ljust(value_width - 4)} │', options)
-#     for line in lines[1:]:
-#         print_text(f'│ {" ".ljust(key_width - 4)} │ {line.ljust(value_width - 4)} │', options)
-
-#     print_text('│ ' + ' ' * (key_width - 1) + '│ ' + ' ' * (value_width - 3) + '│', options)

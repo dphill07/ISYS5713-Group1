@@ -16,17 +16,7 @@ def print_text(args = "", options: PrintOptions = None):
         raise TypeError("text must be a string or a list of strings")
 
     def align_text(text, available_width, alignment):
-        # Add the specified number of spaces to the front of the text
-        # text = ' ' * (options.tab_spaces * 4) + text
 
-        # if alignment == 'center':
-        #     return text.center(available_width)
-        # elif alignment == 'left':
-        #     return text.ljust(available_width)
-        # elif alignment == 'right':
-        #     return text.rjust(available_width)
-        
-        # Subtract the tab spaces from the available width
         available_width -= options.tab_spaces * 4
 
         if alignment == 'center':
@@ -159,4 +149,24 @@ def print_json_in_table_format(json_object, ordered_keys=None, rename_keys=None,
     
     for line in table_lines:
         print_text(line, options)
+
+def print_objects_in_table_format(objects, rename_keys=None, tablefmt='fancy_grid', options: PrintOptions=None):
+    if options is None:
+        options = PrintOptions()
+
+    # Convert objects to dictionaries
+    dict_objects = [obj.__dict__ for obj in objects]
+
+    # Rename keys if rename_keys is provided
+    if rename_keys:
+        dict_objects = [{rename_keys.get(key, key): value for key, value in obj.items()} for obj in dict_objects]
+
+    # Create table string
+    table_string = tabulate(dict_objects, headers="keys", tablefmt=tablefmt)
+
+    # Print table
+    table_lines = table_string.split('\n')
+    for line in table_lines:
+        print_text(line, options)
+
 

@@ -1,8 +1,7 @@
 import requests
 import threading
-import json
-import textwrap
-from datetime import datetime
+import time
+import concurrent.futures
 from utils import text_print_utils as utils
 from utils.text_print_options import PrintOptions, Term
 
@@ -12,17 +11,24 @@ class Power:
         self.power_name = power_name
         self.power_level = power_level
 
-
 def fetch_powers(hero_ids):
     powers_list = []
-    for hero_id in hero_ids:
+
+    def fetch_hero_powers(hero_id):
         url = f"{api_url_base}heroes/{hero_id}/powers"
         response = requests.get(url)
         if response.status_code == 200:
             powers = response.json()
-            powers_list.append(powers['powers'])
-    return powers_list
+            hero_powers = powers['powers']
+            return hero_powers
 
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future_to_hero_id = {executor.submit(fetch_hero_powers, hero_id): hero_id for hero_id in hero_ids}
+        for future in concurrent.futures.as_completed(future_to_hero_id):
+            powers = future.result()
+            powers_list.append(powers)
+
+    return powers_list
 def display_heroes(base_url):
     global api_url_base
     api_url_base = base_url
@@ -59,31 +65,28 @@ def display_heroes(base_url):
             utils.print_text("No heroes found.")
             return
 
-
         utils.print_divider(options=options)
 
         displayed_heroes = 0
-        next_powers = None
-        next_powers_thread = None
+
+        def fetch_powers_batch(hero_ids, powers_list):
+            powers = fetch_powers(hero_ids)
+            powers_list.extend(powers)
 
         # Fetch powers for the first batch of heroes
         first_hero_ids = [hero['hero_id'] for hero in heroes[0:display_limit]]
-        next_powers = fetch_powers(first_hero_ids)
+        all_powers = []
+        fetch_powers_thread = threading.Thread(target=fetch_powers_batch, args=(first_hero_ids, all_powers))
+        fetch_powers_thread.start()
 
         for i in range(0, len(heroes), display_limit):
             hero_batch = heroes[i:i+display_limit]
 
-            # Wait for the next powers to be fetched
-            if next_powers_thread is not None:
-                next_powers_thread.join()
+            # Wait for the powers to be fetched if necessary
+            while len(all_powers) < i + display_limit:
+                time.sleep(0.1)  # Wait a bit before checking again
 
-            powers_batch = next_powers
-
-            # Start fetching the next powers
-            if i + display_limit < len(heroes):
-                next_hero_ids = [hero['hero_id'] for hero in heroes[i+display_limit:i+2*display_limit]]
-                next_powers_thread = threading.Thread(target=fetch_powers, args=(next_hero_ids,))
-                next_powers_thread.start()
+            powers_batch = all_powers[i:i+display_limit]
 
             for hero, powers in zip(hero_batch, powers_batch):
 
@@ -103,6 +106,7 @@ def display_heroes(base_url):
                     'good': Term.GREEN,
                     'bad': Term.RED,
                     'neutral': Term.YELLOW,
+                    '': Term.BLUE,  # Use 'blue' for null alignments
                     None: Term.BLUE  # Use 'blue' for null alignments
                 }
 
@@ -163,6 +167,14 @@ def display_heroes(base_url):
 
 
             displayed_heroes += display_limit
+
+
+            # Fetch powers for the next batch of heroes
+            if i + display_limit < len(heroes):
+                next_hero_ids = [hero['hero_id'] for hero in heroes[i+display_limit:i+2*display_limit]]
+                fetch_powers_thread = threading.Thread(target=fetch_powers_batch, args=(next_hero_ids, all_powers))
+                fetch_powers_thread.start()
+
 
             user_input = utils.get_input("Press enter to continue or type 'cancel' to stop: ")
             if user_input.lower() == 'cancel':

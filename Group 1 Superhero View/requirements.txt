@@ -1,0 +1,12 @@
+#pre install requirements before running the front end code
+
+os
+time
+random
+imageio
+Image
+numpy
+sys 
+requests
+aiohttp
+asyncio

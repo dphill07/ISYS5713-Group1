@@ -47,6 +47,8 @@ Once the viewer is running, you should see the Main Menu as shown below:
 
 **TODO:** Add image of main menu
 
+![test1](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
+
 You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and 0. Quit.
 
 **Option 0** simply closes the program and returns you to the prompt interface.
@@ -54,6 +56,8 @@ You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and
 **Option 1** takes you to the Hero Viewer screen, where you will be prompted to enter the number of heroes you would like to view at a time. The lower the number, the faster the results will be returned. However, you can enter any whole number you would like.
 
 **TODO:** Add image of Hero Viewer
+
+![](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
 
 After entering a number, it will display the heroes in alphabetical order, giving their name at the top, followed by a table that contains their main stats, then another table that displays that heroes powers. The colors of the tables are formatted based on the hero's alignment. Green = good, Red = bad, and Yellow = neutral.
 

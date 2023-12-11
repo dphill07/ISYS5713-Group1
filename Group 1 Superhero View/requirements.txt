@@ -10,3 +10,4 @@ sys
 requests
 aiohttp
 asyncio
+tabulate

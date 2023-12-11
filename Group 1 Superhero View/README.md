@@ -45,7 +45,7 @@ python superheroes.py
 # Using the Superhero API Viewer
 Once the viewer is running, you should see the Main Menu as shown below:
 
-![](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
+<kbd>![](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)</kbd>
 
 You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and 0. Quit.
 

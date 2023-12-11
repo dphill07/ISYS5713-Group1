@@ -45,9 +45,7 @@ python superheroes.py
 # Using the Superhero API Viewer
 Once the viewer is running, you should see the Main Menu as shown below:
 
-**TODO:** Add image of main menu
-
-![test1](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
+![](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
 
 You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and 0. Quit.
 
@@ -55,35 +53,33 @@ You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and
 
 **Option 1** takes you to the Hero Viewer screen, where you will be prompted to enter the number of heroes you would like to view at a time. The lower the number, the faster the results will be returned. However, you can enter any whole number you would like.
 
-**TODO:** Add image of Hero Viewer
-
-!(https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Hero%20Viewer%20-%20Main.png)
 
 After entering a number, it will display the heroes in alphabetical order, giving their name at the top, followed by a table that contains their main stats, then another table that displays that heroes powers. The colors of the tables are formatted based on the hero's alignment. Green = good, Red = bad, and Yellow = neutral.
 
 After displaying the requesting number of heroes, you have the option to either continue by pressing 'enter' or if you would like to stop, type 'cancel' then press enter. Typing 'cancel' will take you back to the main menu.
 
-**TODO:** Add image of Hero Viewer
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Hero%20Viewer%20-%201.png)
 
 **Option 2** takes you to the THANOS SNAP menu. It will ask if you want to snap your fingers, and you can respond with 1 for 'Yes' or 2 for 'No'. If you choose option 2, it will revert to the main menu. If you choose option 1, you will receive a warning about what you are about to do. Choosing option 2 once again reverts you to the main menu. If you choose option 1, however, you will see a gif of Thanos snapping:
 
-**TODO:** Add image of Thanos Snap
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Thanos%20Snap%201.png)
 
 Followed by each hero that is being removed flickering just below the gif:
 
-**TODO:** Add image of Thanos Snap
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Thanos%20Snap%202.png)
 
 Once that is done, it will list all the heroes that remain and return you to the main menu:
 
-**TODO:** Add image of Thanos Snap
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Thanos%20Snap%203.png)
 
 **Option 3** allows you to bring all the heroes back. Selecting '3' brings you to the following screen, asking if you would like to bring them back:
 
-**TODO:** Add image of bringing heroes back
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Bring%20Heroes%20back%201.png)
 
 Choosing 'no' reverts you to the main menu. Choosing 'yes' brings all the heroes back, and displays a message that they have been brought back. It then sends you back to the main menu, where you can view them all once again.
 
-**TODO:** Add image of bringing heroes back
+![](https://github.com/dphill07/ISYS5713-Group1/blob/d-branch/Group%201%20Superhero%20View/README%20Images/Bring%20Heroes%20back%202.png)
 
 However, if you would like to play with their lives, you can snap them out of existence and bring them back as many times as you would like.
 

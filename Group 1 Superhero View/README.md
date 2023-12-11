@@ -57,7 +57,7 @@ You have four options: 1. Show Heroes, 2. Thanos Snap, 3. Bring Heroes Back, and
 
 **TODO:** Add image of Hero Viewer
 
-![](https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
+!(https://github.com/dphill07/ISYS5713-Group1/blob/main/Group%201%20Superhero%20View/README%20Images/Main%20Screen.png)
 
 After entering a number, it will display the heroes in alphabetical order, giving their name at the top, followed by a table that contains their main stats, then another table that displays that heroes powers. The colors of the tables are formatted based on the hero's alignment. Green = good, Red = bad, and Yellow = neutral.
 
